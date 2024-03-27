@@ -1,6 +1,5 @@
 package com.kubernetes.study.domain;
 
-import com.kubernetes.study.domain.BackgroundEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

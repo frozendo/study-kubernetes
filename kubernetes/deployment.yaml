@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: study-kubernetes
+  labels:
+    app: study-kubernetes-deployment
+spec:
+  replicas: 2  # nesse exemplo duas replicas serão executadas
+  selector:
+    matchLabels:
+      app: study-kubernetes-api
+  template: #Pod Template: aqui configuramos o blueprint do pod que o deployment irá gerenciar
+    metadata:
+      labels:
+        app: study-kubernetes-api
+    spec:
+      containers:
+        - name: study-kubernetes-container
+          image: frozendo90/background-run-api:latest
+          ports:
+            - containerPort: 9000
+          livenessProbe:
+            exec:
+              command:
+                - cat
+                - kubernetes-liveness.txt
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 9000
+            initialDelaySeconds: 5
+            periodSeconds: 10
