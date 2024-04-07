@@ -26,12 +26,10 @@ public class HealthCheckApi {
     @GetMapping("/readiness")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<String> readiness() {
-        logger.info("Run readiness probe");
         if (readinessGood) {
-            logger.info("It's safe!! Readiness is good!!");
             return new ResponseEntity<>("OK", HttpStatus.OK);
         }
-        logger.info("Houston we have a problem!!");
+        logger.error("Houston we have a problem!!");
         return new ResponseEntity<>("NOK", HttpStatus.BAD_REQUEST);
     }
 

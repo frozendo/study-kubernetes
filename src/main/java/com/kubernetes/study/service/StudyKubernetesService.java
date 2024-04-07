@@ -1,10 +1,11 @@
-package com.kubernetes.study.services;
+package com.kubernetes.study.service;
 
 import com.kubernetes.study.domain.StatusProcess;
 import com.kubernetes.study.domain.StudyKubernetesRepository;
 import com.kubernetes.study.domain.BackgroundEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -27,8 +28,8 @@ public class StudyKubernetesService {
         thread.start();
     }
 
-    public Set<BackgroundEntity> listProcessExecuted() {
-        return repository.list();
+    public List<BackgroundEntity> listProcessExecuted() {
+        return repository.findAll();
     }
 
 }

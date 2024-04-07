@@ -1,4 +1,4 @@
-package com.kubernetes.study.services;
+package com.kubernetes.study.service;
 
 import com.kubernetes.study.domain.StatusProcess;
 import com.kubernetes.study.domain.StudyKubernetesRepository;
@@ -24,7 +24,7 @@ public class BackgroundProcessService implements Runnable {
         updateProcess(StatusProcess.RUNNING);
 
         try {
-            for (int i = 1; i <= backgroundEntity.getToProcess(); i++) {
+            for (int i = 1; i <= backgroundEntity.getPending(); i++) {
                 Thread.sleep(3000);
                 logger.info("Thread: {}, counting = {}", backgroundEntity.getIdentity(), i);
 
@@ -46,12 +46,12 @@ public class BackgroundProcessService implements Runnable {
 
     private void updateProcess(StatusProcess status) {
         backgroundEntity.updateStatus(status);
-        repository.update(backgroundEntity);
+        repository.save(backgroundEntity);
     }
 
     private void updateProcess(int processed) {
         backgroundEntity.updateExecutionData(processed);
-        repository.update(backgroundEntity);
+        repository.save(backgroundEntity);
     }
 
 }

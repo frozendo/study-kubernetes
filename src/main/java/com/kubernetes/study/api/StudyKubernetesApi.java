@@ -1,6 +1,6 @@
 package com.kubernetes.study.api;
 
-import com.kubernetes.study.services.StudyKubernetesService;
+import com.kubernetes.study.service.StudyKubernetesService;
 import com.kubernetes.study.domain.BackgroundEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -27,7 +28,7 @@ public class StudyKubernetesApi {
     }
 
     @GetMapping
-    public Set<BackgroundEntity> listBackground() {
+    public List<BackgroundEntity> listBackground() {
         return studyKubernetesService.listProcessExecuted();
     }
 

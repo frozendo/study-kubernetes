@@ -1,0 +1,13 @@
+version : '3'
+services:
+  database:
+    container_name: kubernetes-database
+    image: 'postgres:13.1-alpine'
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123@qwe#
+      - POSTGRES_DB=kubernetes-db
+    volumes:
+      - "./scripts/schema.sql:/docker-entrypoint-initdb.d/1.sql"

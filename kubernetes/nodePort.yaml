@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: kubernetes-lab
+  name: study-kubernetes-node-port
+  labels:
+    app: study-kubernetes-service
+spec:
+  type: NodePort
+  ports:
+    - port: 9000
+      targetPort: 9000
+      protocol: TCP
+      nodePort: 32000
+  selector:
+    app: study-kubernetes-api
