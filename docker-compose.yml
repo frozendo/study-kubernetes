@@ -11,3 +11,10 @@ services:
       - POSTGRES_DB=kubernetes-db
     volumes:
       - "./scripts/schema.sql:/docker-entrypoint-initdb.d/1.sql"
+    networks:
+      - kubernetes-test
+
+networks:
+  kubernetes-test:
+    external: false
+    name: kubernetes-test

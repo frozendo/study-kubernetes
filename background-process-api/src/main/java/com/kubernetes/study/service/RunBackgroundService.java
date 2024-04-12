@@ -11,13 +11,16 @@ import java.util.List;
 public class RunBackgroundService {
 
     private final BackgroundRepository repository;
+    private final UuidService uuidService;
 
-    public RunBackgroundService(BackgroundRepository repository) {
+    public RunBackgroundService(BackgroundRepository repository, UuidService uuidService) {
         this.repository = repository;
+        this.uuidService = uuidService;
     }
 
     public void startBackgroundProcess(int toProcess) {
-        var background = new BackgroundEntity(toProcess, StatusProcess.SCHEDULED);
+        var uniqueId = uuidService.getUniqueId();
+        var background = new BackgroundEntity(uniqueId, toProcess, StatusProcess.SCHEDULED);
 
         repository.save(background);
 

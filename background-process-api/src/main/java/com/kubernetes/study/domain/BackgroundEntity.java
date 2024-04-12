@@ -32,11 +32,8 @@ public class BackgroundEntity {
     public BackgroundEntity() {
     }
 
-    public BackgroundEntity(int pending, StatusProcess status) {
-        this.identity = UUID.randomUUID()
-            .toString()
-            .replace("-", "")
-            .substring(8);
+    public BackgroundEntity(String identity, int pending, StatusProcess status) {
+        this.identity = identity;
         this.pending = pending;
         this.processed = 0;
         this.status = status;
