@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StudyKubernetesApplication {
+public class BackgroundProcessApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StudyKubernetesApplication.class, args);
+		SpringApplication.run(BackgroundProcessApiApplication.class, args);
 	}
 
 }

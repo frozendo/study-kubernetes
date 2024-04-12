@@ -1,7 +1,7 @@
 package com.kubernetes.study.service;
 
 import com.kubernetes.study.domain.StatusProcess;
-import com.kubernetes.study.domain.StudyKubernetesRepository;
+import com.kubernetes.study.domain.BackgroundRepository;
 import com.kubernetes.study.domain.BackgroundEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +11,9 @@ public class BackgroundProcessService implements Runnable {
     private static final Logger logger = LoggerFactory.getLogger(BackgroundProcessService.class);
 
     private final BackgroundEntity backgroundEntity;
-    private final StudyKubernetesRepository repository;
+    private final BackgroundRepository repository;
 
-    public BackgroundProcessService(BackgroundEntity backgroundEntity, StudyKubernetesRepository repository) {
+    public BackgroundProcessService(BackgroundEntity backgroundEntity, BackgroundRepository repository) {
         this.backgroundEntity = backgroundEntity;
         this.repository = repository;
     }

@@ -1,6 +1,6 @@
 package com.kubernetes.study.api;
 
-import com.kubernetes.study.service.StudyKubernetesService;
+import com.kubernetes.study.service.RunBackgroundService;
 import com.kubernetes.study.domain.BackgroundEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,27 +9,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/background")
-public class StudyKubernetesApi {
+public class RunBackgroundApi {
 
-    private final StudyKubernetesService studyKubernetesService;
+    private final RunBackgroundService runBackgroundService;
 
-    public StudyKubernetesApi(StudyKubernetesService studyKubernetesService) {
-        this.studyKubernetesService = studyKubernetesService;
+    public RunBackgroundApi(RunBackgroundService runBackgroundService) {
+        this.runBackgroundService = runBackgroundService;
     }
 
     @PostMapping("/{toProcess}")
     public String startNewBackground(@PathVariable("toProcess") int toProcess) {
-        studyKubernetesService.startBackgroundProcess(toProcess);
+        runBackgroundService.startBackgroundProcess(toProcess);
         return "Running";
     }
 
     @GetMapping
     public List<BackgroundEntity> listBackground() {
-        return studyKubernetesService.listProcessExecuted();
+        return runBackgroundService.listProcessExecuted();
     }
 
 }

@@ -1,19 +1,18 @@
 package com.kubernetes.study.service;
 
 import com.kubernetes.study.domain.StatusProcess;
-import com.kubernetes.study.domain.StudyKubernetesRepository;
+import com.kubernetes.study.domain.BackgroundRepository;
 import com.kubernetes.study.domain.BackgroundEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
-public class StudyKubernetesService {
+public class RunBackgroundService {
 
-    private final StudyKubernetesRepository repository;
+    private final BackgroundRepository repository;
 
-    public StudyKubernetesService(StudyKubernetesRepository repository) {
+    public RunBackgroundService(BackgroundRepository repository) {
         this.repository = repository;
     }
 
