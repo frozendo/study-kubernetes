@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: kubernetes-lab
+  name: study-kubernetes-uuid-app
+  labels:
+    app: study-kubernetes-uuid-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: study-kubernetes-uuid-service
+  template: #Pod Template: aqui configuramos o blueprint do pod que o deployment irá gerenciar
+    metadata:
+      labels:
+        app: study-kubernetes-uuid-service
+    spec:
+      containers:
+        - name: study-kubernetes-uuid-container
+          image: uuid-service:study
+          ports:
+            - containerPort: 9200
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 9200
+            initialDelaySeconds: 5
+            periodSeconds: 10

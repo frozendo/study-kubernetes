@@ -2,22 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: kubernetes-lab
-  name: study-kubernetes
+  name: study-kubernetes-background-app
   labels:
-    app: study-kubernetes-deployment
+    app: study-kubernetes-background-deployment
 spec:
   replicas: 2  # nesse exemplo duas replicas serão executadas
   selector:
     matchLabels:
-      app: study-kubernetes-api
+      app: study-kubernetes-background-api
   template: #Pod Template: aqui configuramos o blueprint do pod que o deployment irá gerenciar
     metadata:
       labels:
-        app: study-kubernetes-api
+        app: study-kubernetes-background-api
     spec:
       containers:
-        - name: study-kubernetes-container
-          image: frozendo90/background-run-api:latest
+        - name: study-kubernetes-background-container
+          image: background-run-api:study
           ports:
             - containerPort: 9000
           livenessProbe:

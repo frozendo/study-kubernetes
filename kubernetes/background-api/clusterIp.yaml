@@ -2,13 +2,13 @@ kind: Service
 apiVersion: v1
 metadata:
   namespace: kubernetes-lab
-  name: study-kubernetes-cluster-ip
+  name: study-kubernetes-background-cluster-ip
   labels:
-    app: study-kubernetes-service
+    app: study-kubernetes-background-service
 spec:
   ports:
     - port: 9200
       targetPort: 9000
       protocol: TCP
   selector:
-    app: study-kubernetes-api
+    app: study-kubernetes-background-api

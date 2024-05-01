@@ -1,0 +1,1 @@
+kind create cluster --name study-kubernetes-cluster --config kubernetes/general/kind-config.yaml

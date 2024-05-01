@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  namespace: kubernetes-lab
+  name: study-kubernetes-postgres-external
+  labels:
+    app: study-kubernetes-postgres-external
+subsets:
+  - addresses:
+      - ip: 172.17.0.1
+    ports:
+      - port: 5432
