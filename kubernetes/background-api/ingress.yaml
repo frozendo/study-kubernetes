@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: kubernetes-lab
+  name: study-kubernetes-background-ingress
+  labels:
+    app: study-kubernetes-background-proxy
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: backgroundprocess.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: study-kubernetes-background-cluster-ip
+                port:
+                  number: 9200

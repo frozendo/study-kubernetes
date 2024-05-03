@@ -38,3 +38,25 @@ The identifier for each processing is obtained from the *UUID Service*, making a
 The infrastructure of this application is composed of: 
 - [deployment.yml](https://github.com/frozendo/study-kubernetes/blob/main/kubernetes/background-api/deployment.yaml): the file that configures our pods. This app starts with two replicas.
 - [clusterIp.yml](https://github.com/frozendo/study-kubernetes/blob/main/kubernetes/background-api/clusterIp.yaml): configure a service for the application that will redirect requests to our pods.
+- [ingress.yml](https://github.com/frozendo/study-kubernetes/blob/main/kubernetes/background-api/clusterIp.yaml): enable the application to receive requests from outside the cluster.
+
+##### Configure Ingress: 
+We need to create a host for ingress to work correctly.
+To do this, first get the IP address of the main container (control-plane) of the cluster run by kind:
+```
+docker inspect study-kubernetes-cluster-control-plane | grep IPAddress
+```
+
+Now, open the `/etc/hosts` file and add the line below:
+```
+<ip-control-plane> backgroundprocess.io
+```
+
+This configures our control plane IP to respond to the backgroundprocess.io host.
+With this done, we can make calls to our application within the cluster
+
+```
+curl -X GET 'http://backgroundprocess.io/hello'
+curl -X POST 'http://backgroundprocess.io/background/10'
+curl -X GET 'http://backgroundprocess.io/background'
+```

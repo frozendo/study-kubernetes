@@ -19,25 +19,11 @@ echo "Config postgres database service"
 kubectl apply -f kubernetes/postgres/postgres-external-service.yaml
 kubectl apply -f kubernetes/postgres/postgres-external-endpoint.yaml
 
-# background-process-api application
-echo "Build background-process-api"
+# config ingress on kind kubernetes
+echo "Config ingress on cluster"
+kubectl apply --filename https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
 
-cd background-process-api 
-
-./gradlew clean build -x test
-
-docker build -t background-run-api:study .
-
-kind load docker-image background-run-api:study --name study-kubernetes-cluster
-
-cd ..
-
-echo "Create resources for background-process-api"
-
-kubectl apply -f kubernetes/background-api/deployment.yaml
-
-kubectl apply -f kubernetes/background-api/clusterIp.yaml
-
+kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=90s
 
 # uuid-service application
 echo "Build uuid-service"
@@ -57,3 +43,24 @@ echo "Create resources for uuid-service"
 kubectl apply -f kubernetes/uuid-service/deployment.yaml
 
 kubectl apply -f kubernetes/uuid-service/nodePort.yaml
+
+# background-process-api application
+echo "Build background-process-api"
+
+cd background-process-api 
+
+./gradlew clean build -x test
+
+docker build -t background-run-api:study .
+
+kind load docker-image background-run-api:study --name study-kubernetes-cluster
+
+cd ..
+
+echo "Create resources for background-process-api"
+
+kubectl apply -f kubernetes/background-api/deployment.yaml
+
+kubectl apply -f kubernetes/background-api/clusterIp.yaml
+
+kubectl apply -f kubernetes/background-api/ingress.yaml
